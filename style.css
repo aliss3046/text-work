@@ -1,0 +1,119 @@
+/* Основные стили для анимаций и эффектов */
+
+/* Анимация для полужирных элементов при движении */
+@keyframes wiggle {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-3px); }
+    75% { transform: translateY(3px); }
+}
+
+/* Анимация для кликнутых абзацев */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Стили для анимированных полужирных элементов */
+b.animating, strong.animating {
+    animation: wiggle 0.5s ease-in-out infinite;
+    display: inline-block !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Стили для всплывающего окна (абзац после 2-го клика) */
+p.popup-mode {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3) !important;
+    border: 3px solid #27ae60 !important;
+    resize: both !important;
+    overflow: auto !important;
+    min-width: 200px !important;
+    min-height: 200px !important;
+}
+
+/* Подсветка активного абзаца */
+p:active {
+    animation: pulse 0.3s ease !important;
+}
+
+/* Плавные переходы для всех абзацев */
+p {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+}
+
+/* Эффект наведения на абзацы */
+p:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.05), transparent) !important;
+}
+
+/* Стили для текста внутри всплывающего окна */
+p.popup-mode b,
+p.popup-mode strong {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Индикатор текущего состояния абзаца */
+p::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, #3498db, #2ecc71, #e74c3c, #f39c12);
+    transition: width 0.3s ease;
+}
+
+p.clicked-1::after { width: 25%; background: #3498db; }
+p.clicked-2::after { width: 50%; background: #2ecc71; }
+p.clicked-3::after { width: 75%; background: #e74c3c; }
+p.clicked-4::after { width: 100%; background: #f39c12; }
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .counter {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+    
+    .container {
+        padding: 15px;
+        margin-top: 60px;
+    }
+    
+    p.popup-mode {
+        width: 90vw !important;
+        height: 200px !important;
+        left: 5vw !important;
+    }
+}
+
+/* Стили для скроллбара во всплывающем окне */
+p.popup-mode::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+p.popup-mode::-webkit-scrollbar-track {
+    background: rgba(46, 204, 113, 0.1);
+    border-radius: 4px;
+}
+
+p.popup-mode::-webkit-scrollbar-thumb {
+    background: #27ae60;
+    border-radius: 4px;
+}
+
+p.popup-mode::-webkit-scrollbar-thumb:hover {
+    background: #219653;
+}
